@@ -1,4 +1,4 @@
-const {Server, Socket} = require("socket.io");
+const {Server, Socket} = require('socket.io');
 
 /**
  * 
