@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  node: 
+    container_name: node_server_boilerplate
+    build:
+      context: .
+      dockerfile: ./DockerFile
+    ports: 
+      - 4000:4000
+      - 3000:3000
+    volumes:
+      - .:/app
+    depends_on:
+      - mongo-express
+    command: > 
+      bash -c "npm install && npm start"
+
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
+      MONGO_INITDB_ROOT_DATABASE: ${DB_NAME}
+    volumes:
+      - database:/data/db
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8888:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${DB_USER}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${DB_PASSWORD}
+      ME_CONFIG_MONGODB_URL: mongodb://${DB_USER}:${DB_PASSWORD}@mongo:27017/
+    
+volumes:
+    database:
