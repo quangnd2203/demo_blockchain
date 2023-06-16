@@ -1,16 +1,20 @@
-// require('@nomicfoundation/hardhat-toolbox');
-require('dotenv').config('../.env');
+require('@nomicfoundation/hardhat-toolbox');
+require("@nomicfoundation/hardhat-verify");
 
-// /** @type import('hardhat/config').HardhatUserConfig */
-console.log("PRV_KEY");
-console.log(process.env);
+require('dotenv').config({ path: '../env/.env' });
+require('dotenv').config({ path: '../env/blockchain.env' });
 
-// module.exports = {
-//   solidity: '0.8.18',
-//   networks: {
-//     bsctest:{
-//       url: 'https://data-seed-prebsc-1-s1.binance.org:8545',
-//       accounts: [process.env.PRIVATE_KEY]
-//     }
-//   }
-// };
+/** @type import('hardhat/config').HardhatUserConfig */
+
+module.exports = {
+  solidity: '0.8.18',
+  networks: {
+    bsctest: {
+      url: process.env.NETWORK_URL,
+      accounts: [process.env.PRIVATE_KEY]
+    }
+  },
+  etherscan: {
+    apiKey: process.env.API_KEY
+  }
+};
