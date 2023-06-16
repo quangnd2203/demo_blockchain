@@ -2,7 +2,7 @@ const databaseService = require('./services/database_service');
 const socketService = require('./services/socket_service');
 const apiService = require('./services/api_service');
 const utils = require('./utils/utils');
-require('dotenv').config('./.env');
+require('dotenv').config('./developer.env');
 
 databaseService.createConnection( async () => {
     apiService.listen(process.env.SERVER_PORT, () => {
