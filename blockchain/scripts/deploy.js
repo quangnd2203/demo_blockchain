@@ -1,19 +1,16 @@
-const BlockchainConfig = require('./config');
+const { exec } = require('child_process');
 
-const { ethers } = require("hardhat");
+async function deployContract() {
+  const network = 'bsctest';
 
-var config = new BlockchainConfig();
-
-async function main() {
-    const [deployer] = await ethers.getSigners();
-    console.log('Deploying contracts with the account:', deployer.address);
-    const token = await ethers.deployContract('CucCungToken');
-    config.tokenAddress = await token.getAddress();
+  const command = `npx hardhat deploy --network ${network}`;
+  exec(command, (error, stdout, stderr) => {
+    if (error) {
+      console.error('Error deploying contract:', error);
+      return;
+    }
+    console.log(stdout);
+  });
 }
 
-main().then(() => {
-    let config = new BlockchainConfig();
-    console.log(`Token Address: ${config.tokenAddress}`);
-});
-
-module.exports = main;
+deployContract();

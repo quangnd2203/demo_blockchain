@@ -4,7 +4,7 @@ services:
   node: 
     container_name: cuc_cung_server
     build:
-      context: ./node_server
+      context: ./server
       dockerfile: DockerFile.server
     ports: 
       - 4000:4000
@@ -27,9 +27,9 @@ services:
       bash -c "
         npm install &&
         source /root/.nvm/nvm.sh &&
-        cd blockchain &&
         npx hardhat node
       "
+
   mongo:
     image: mongo
     restart: always

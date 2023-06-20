@@ -1,11 +1,11 @@
 require('@nomicfoundation/hardhat-toolbox');
 require("@nomicfoundation/hardhat-verify");
-
-require('dotenv').config({ path: './.env' });
 require('dotenv').config({ path: '../.env' });
+const task = require('./scripts/task');
+
+// task("balance", "Prints an account's balance").setAction(async () => {console.log('CCCC')});
 
 /** @type import('hardhat/config').HardhatUserConfig */
-
 module.exports = {
   solidity: '0.8.18',
   networks: {
@@ -16,5 +16,6 @@ module.exports = {
   },
   etherscan: {
     apiKey: process.env.API_KEY
-  }
+  },
+  task: task,
 };

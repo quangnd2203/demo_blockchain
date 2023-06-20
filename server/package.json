@@ -2,9 +2,9 @@
   "name": "blockchain_demo",
   "version": "1.0.0",
   "description": "",
-  "main": "src/main.js",
+  "main": "node_server/main.js",
   "scripts": {
-    "start": "nodemon src/main.js",
+    "start": "nodemon node_server/main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -22,15 +22,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.5.2",
     "mongoose-sequence": "^5.3.1",
-    "no-save": "^1.0.0",
     "nodemon": "^2.0.19",
     "npm": "^8.17.0",
-    "socket.io": "^4.5.1",
-    "start": "^5.1.0"
-  },
-  "devDependencies": {
-    "@nomicfoundation/hardhat-toolbox": "^3.0.0",
-    "@nomicfoundation/hardhat-verify": "^1.0.1",
-    "hardhat": "^2.15.0"
+    "socket.io": "^4.5.1"
   }
 }
