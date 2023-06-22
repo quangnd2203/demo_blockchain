@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 import "hardhat/console.sol";
 
 contract CucCungToken is ERC20("CucCung", "CCQ"), ERC20Burnable, Ownable {
-    uint256 private cap = 50_000_000_000 * 10 ** uint256(18);
+    uint256 private cap = 50_000 * 10 ** uint256(18);
 
     constructor() {
         console.log("owner: %s maxcap: %s", msg.sender, cap);

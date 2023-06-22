@@ -1,16 +1,28 @@
-const { exec } = require('child_process');
+const utils = require('./utils')
+const network = 'bsctest';
 
 async function deployContract() {
-  const network = 'bsctest';
-
   const command = `npx hardhat deploy --network ${network}`;
-  exec(command, (error, stdout, stderr) => {
-    if (error) {
-      console.error('Error deploying contract:', error);
-      return;
-    }
-    console.log(stdout);
-  });
+  const result = await utils.executeCommand(command)
+  const data = (result).split('\n');
+  console.log(result);
+  return data[data.length - 1];
 }
 
-deployContract();
+async function verifyContract(deployAddress) {
+  const command = `npx hardhat verify --network ${network} ${deployAddress}`;
+  const result = await utils.executeCommand(command);
+  console.log(result);
+}
+
+async function main() {
+  const deployAddress = await deployContract();
+  await utils.sleep(7000); 
+  await verifyContract(deployAddress);
+}
+
+main().then(() => {
+  console.log(`Deploy success on ${network}`);
+}).catch((error) => {
+  console.error(error);
+});

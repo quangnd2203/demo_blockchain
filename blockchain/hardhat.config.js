@@ -1,19 +1,13 @@
 require('@nomicfoundation/hardhat-toolbox');
 require("@nomicfoundation/hardhat-verify");
-require('dotenv').config({ path: '../.env' });
+require('dotenv').config();
 const task = require('./scripts/task');
-
-// task("balance", "Prints an account's balance").setAction(async () => {console.log('CCCC')});
+const networks = require('./scripts/network');
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
   solidity: '0.8.18',
-  networks: {
-    bsctest: {
-      url: 'https://data-seed-prebsc-1-s1.binance.org:8545',
-      accounts: [process.env.PRIVATE_KEY]
-    }
-  },
+  networks: networks,
   etherscan: {
     apiKey: process.env.API_KEY
   },

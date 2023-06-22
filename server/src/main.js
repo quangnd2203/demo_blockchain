@@ -1,8 +1,7 @@
 const databaseService = require('./services/database_service');
 const socketService = require('./services/socket_service');
 const apiService = require('./services/api_service');
-const BlockchainConfig = require('../../blockchain/scripts/config');
-require('dotenv').config('../../.env');
+require('dotenv').config();
 
 
 databaseService.createConnection( async () => {
