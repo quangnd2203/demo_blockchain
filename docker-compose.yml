@@ -11,7 +11,6 @@ services:
       - 3000:3000
     depends_on:
       - mongo-express
-      - blockchain
     volumes:
       - ./server:/app
 
@@ -20,6 +19,8 @@ services:
     build:
       context: ./blockchain
       dockerfile: DockerFile.blockchain
+    depends_on:
+      - node
     command: >
       bash -c "
         npm install &&

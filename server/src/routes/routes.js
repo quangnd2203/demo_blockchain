@@ -1,4 +1,5 @@
 const express = require('express');
+const systemRoute = require('./token');
 // const authRoute = require('./auth_route.js');
 // const userRoute = require('./user_route.js');
 // const conversationRoute = require('./conversation_route');
@@ -17,6 +18,10 @@ const routes = [
     //     path: '/conversation',
     //     route: conversationRoute,
     // }
+    {
+        path: '/token',
+        route: systemRoute,
+    }
 ];
 
 routes.forEach(

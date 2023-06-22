@@ -1,16 +1,24 @@
 class NetworkResponse{
-    constructor(status, message, data){
-        this.status = status;
+    constructor(code, message, data){
+        this.code = code;
         this.message = message;
         this.data = data;
     }
 }
 
-NetworkResponse.fromErrors = function(error){
+NetworkResponse.fromErrors = function(code, error){
     return new NetworkResponse(
-        status = 0,
+        code = code,
         message = error,
         data = null,
+    );
+}
+
+NetworkResponse.success = function(data, message){
+    return new NetworkResponse(
+        code = 200,
+        message = message,
+        data = data,
     );
 }
 

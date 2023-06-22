@@ -36,3 +36,16 @@ module.exports.authorizeSocket = async (socket, next) => {
     }
 }
 
+module.exports.authrorizeApiKey = async (request, response, next) => {
+    try{
+        const apikey = request.header('api-key');
+        if(process.env.SERVER_API_KEY !== apikey){
+            throw new Error();
+        }
+        next();
+    }catch(error){
+        console.log(error);
+        response.status(401).send(NetworkResponse.fromErrors(401, 'api_key_is_incorrect'));
+    }
+}
+

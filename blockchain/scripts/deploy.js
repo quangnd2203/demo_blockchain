@@ -1,5 +1,7 @@
-const utils = require('./utils')
-const network = 'bsctest';
+const utils = require('./utils');
+const repo = require('../repository/server_repository');
+require('dotenv').config();
+const network = 'hardhat';
 
 async function deployContract() {
   const command = `npx hardhat deploy --network ${network}`;
@@ -18,6 +20,7 @@ async function verifyContract(deployAddress) {
 async function main() {
   const deployAddress = await deployContract();
   await utils.sleep(7000); 
+  repo.changeTokenAddress(deployAddress);
   await verifyContract(deployAddress);
 }
 

@@ -1,8 +1,8 @@
 const app = require('express')();
-const http = require('http');
+const https = require('https');
 const authorizeSocket = require('../middlewares/authorize_middleware').authorizeSocket;
 const socketIo = require('socket.io');
-const socketService = http.Server(app);
+const socketService = https.Server(app);
 const io = new socketIo.Server(socketService);
 
 const onConnection = (socket) => {
