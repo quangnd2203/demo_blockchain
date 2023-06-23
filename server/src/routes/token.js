@@ -5,7 +5,7 @@ const NetworkResponse = require('../models/network_response');
 
 router.post('/token_address', authrorizeApiKey, (request, response) => {
     process.env.TOKEN_ADDRESS = request.body.token_address;
-    console.log(process.env.TOKEN_ADDRESS);
+    console.log(request.body.token_address);
     response.send(NetworkResponse.success(null, 'update_success'))
 });
 

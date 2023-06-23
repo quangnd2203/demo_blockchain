@@ -1,11 +1,13 @@
-const axios = require('axios');
+const axiosInstance = require('../scripts/axios');
 
 module.exports.changeTokenAddress = (address) => {
-    axios.post(`${process.env.SERVER_BASE}/api/token_address`, {
-        token_address: address
+    // send data to server
+    axiosInstance.post(`https://host.docker.internal:3000/api/token/token_address`, {
+        token_address: address,
+        // abi = 
     }, {
         headers:{
             'api-key': process.env.SERVER_API_KEY
         }
-    })
+    });
 }

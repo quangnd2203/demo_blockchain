@@ -19,3 +19,9 @@ ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 WORKDIR /app
 
 COPY . .
+
+RUN npm install
+
+COPY . .
+
+CMD ["npm", "run", "start"]

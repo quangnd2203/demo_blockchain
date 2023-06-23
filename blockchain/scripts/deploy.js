@@ -1,7 +1,7 @@
 const utils = require('./utils');
 const repo = require('../repository/server_repository');
 require('dotenv').config();
-const network = 'hardhat';
+const network = 'bsctest';
 
 async function deployContract() {
   const command = `npx hardhat deploy --network ${network}`;

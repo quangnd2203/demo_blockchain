@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 module.exports.createConnection = (next) => {
-    console.log(`mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@mongo:27017/`);
     const config = {
         dbName: process.env.DB_NAME
     };
