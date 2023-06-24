@@ -6,5 +6,5 @@ const httpAgent = new https.Agent({
 });
 
 module.exports = axios.create({
-    httpsAgent: httpAgent,
-  })
+  httpsAgent: httpAgent,
+})

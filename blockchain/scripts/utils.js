@@ -1,4 +1,6 @@
 const { exec } = require('child_process');
+const fs = require('fs');
+const path = require('path');
 
 module.exports.executeCommand = (command) => {
     return new Promise((resolve, reject) => {
@@ -19,4 +21,21 @@ module.exports.executeCommand = (command) => {
 
 module.exports.sleep = (ms) => {
     return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+module.exports.readFileJson = (filePath) => {
+    _filePath = path.join(__dirname, filePath);
+    return new Promise((resolve, reject) => {
+        fs.readFile(_filePath, 'utf8', (error, data) => {
+            if (error) {
+                reject(error);
+            }
+            try {
+                const jsonData = JSON.parse(data);
+                resolve(jsonData);
+            } catch (error) {
+                reject(error);
+            }
+        });
+    });
 }
