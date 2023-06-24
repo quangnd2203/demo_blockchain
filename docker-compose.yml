@@ -2,39 +2,67 @@ version: '3'
 
 services:
   node: 
-    container_name: node_server_boilerplate
+    container_name: cuc_cung_server
     build:
-      context: .
-      dockerfile: ./DockerFile
+      context: ./server
+      dockerfile: DockerFile.server
     ports: 
       - 4000:4000
       - 3000:3000
-    volumes:
-      - .:/app
     depends_on:
       - mongo-express
-    command: > 
-      bash -c "npm install && npm start"
+    volumes:
+      - ./server:/app
+    networks:
+      - container-network 
+
+  blockchain:
+    container_name: blockchain
+    build:
+      context: ./blockchain
+      dockerfile: DockerFile.blockchain
+    depends_on:
+      - node
+    command: >
+      bash -c "
+        npm start
+      "
+    volumes:
+      - ./blockchain:/app
+    networks:
+      - container-network 
 
   mongo:
     image: mongo
     restart: always
+    ports:
+      - 27017:27017
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${DB_USER}
       MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
       MONGO_INITDB_ROOT_DATABASE: ${DB_NAME}
     volumes:
       - database:/data/db
+    networks:
+      - container-network 
 
   mongo-express:
     image: mongo-express
     restart: always
     ports:
       - 8888:8081
+    depends_on:
+      - mongo
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: ${DB_USER}
       ME_CONFIG_MONGODB_ADMINPASSWORD: ${DB_PASSWORD}
       ME_CONFIG_MONGODB_URL: mongodb://${DB_USER}:${DB_PASSWORD}@mongo:27017/
-    
+    networks:
+      - container-network 
+
 volumes:
     database:
+
+networks:
+  container-network:
+    driver: bridge
