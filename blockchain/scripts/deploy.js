@@ -11,23 +11,21 @@ async function compileContract() {
 async function deployContract() {
   const command = `npx hardhat deploy --network ${network}`;
   const result = await utils.executeCommand(command);
-  const data = (result).split('\n');
-  console.log(result);
-  return data[data.length - 1];
+  return JSON.parse(result);
 }
 
-async function verifyContract(deployAddress) {
-  const command = `npx hardhat verify --network ${network} ${deployAddress}`;
+async function verifyContract(contract) {
+  const command = `npx hardhat verify --network ${network} ${contract.address}`;
   const result = await utils.executeCommand(command);
   console.log(result);
 }
 
 async function main() {
   await compileContract();
-  const deployAddress = await deployContract();
+  const contracts = await deployContract();
   await utils.sleep(7000); 
-  repo.changeTokenAddress(deployAddress);
-  await verifyContract(deployAddress);
+  repo.changeTokenAddress(contracts);
+  await verifyContract(contracts.viviPoint);
 }
 
 main().then(() => {

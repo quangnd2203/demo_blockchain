@@ -1,12 +1,15 @@
 const NetworkResponse = require('../models/network_response');
-const ConfigModel = require('../models/config_model');
+const ContractModel = require('../models/smart_contract_info_model');
 
 const keyContractAddress = 'contract_address';
 const keyContractAbi = 'contract_abi'
 
-module.exports.updateConfigBlockchain = async (address, abi) => {
-    await ConfigModel.updateKey(keyContractAddress, address);
-    await ConfigModel.updateKey(keyContractAbi, abi);
+module.exports.updateConfigBlockchain = async (contracts) => {
+    for(let key in contracts){
+        if(contracts.hasOwnProperty(key)){
+            ContractModel.updateContract(key, contracts[key]);
+        }
+    }
     return NetworkResponse.success(
         data = null,
         message = 'update_config_success',

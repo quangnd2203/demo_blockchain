@@ -1,10 +1,18 @@
 const { task } = require('hardhat/config');
+const { readFileJson } = require('../scripts/utils');
 
 task('deploy', 'Deploy to network', async () => {
     const [deployer] = await ethers.getSigners();
-    console.log('Deploying contracts with the account:', deployer.address);
-    const token = await ethers.deployContract('CucCungToken');
-    console.log(await token.getAddress());
+    const token = await ethers.deployContract('ViViPoint');
+    const abi = await readFileJson('../artifacts/contracts/vivi_point.sol/ViViPoint.json');
+    console.log(`
+        {
+            "viviPoint": {
+                "address": "${await token.getAddress()}",
+                "abi": ${JSON.stringify(abi.abi)}
+            }
+        }
+    `);
 });
 
 module.exports = {
