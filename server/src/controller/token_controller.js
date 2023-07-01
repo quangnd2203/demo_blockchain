@@ -1,7 +1,7 @@
 const repo = require('../repository/config_repository');
 const { validationResult } = require('express-validator');
 const NetworkResponse = require('../models/network_response');
-const blockchainService = require('../services/blockchain_service');
+const blockchainService = require('../services/blockchain/blockchain_helper');
 const { hashPassword } = require('../utils/utils');
 
 module.exports.updateConfigBlockchain = async (request) => {

@@ -1,7 +1,7 @@
 const databaseService = require('./services/database_service');
 const socketService = require('./services/socket_service');
 const apiService = require('./services/api_service');
-const blockchainService = require('./services/blockchain_service');
+const viviPointservice = require('./services/blockchain/vivi_point_service');
 require('dotenv').config();
 
 
@@ -12,9 +12,9 @@ databaseService.createConnection(async () => {
     socketService.listen(process.env.SOCKET_PORT, () => {
         console.log(`Socket.io is up and running on port: ${process.env.SOCKET_PORT}`);
     });
-    blockchainService.init().then((value) => {
-        console.log(`Connect ViViPoint: ${value}`);
-    }); 
+    viviPointservice.init().then((value) => {
+        console.log(`Connect ViVi Point smartcontracts: ${value}`);
+    });
 });
 
 
